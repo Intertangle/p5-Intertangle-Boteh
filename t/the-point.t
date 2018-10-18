@@ -10,12 +10,9 @@ use ThePoint;
 
 subtest "What is the point?" => sub {
 	use Carp::Always;
-	my ($root, $top) = ThePoint->tree;
+	my $top = ThePoint->tree;
 
 	use Renard::Jacquard::Render::GenerateTree;
-
-	my $tree = Renard::Jacquard::Render::GenerateTree->get_render_tree(
-				root => $root );
 
 	my $file = Path::Tiny->tempfile;
 	Renard::Jacquard::Render::GenerateTree

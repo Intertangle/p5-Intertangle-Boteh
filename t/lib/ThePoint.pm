@@ -196,7 +196,8 @@ method tree() {
 	#use DDP; p $states, class => { expand => 'all' };
 	#use DDP; p $root->layout->layouts->[1];
 
-	return ($root, $top);
+	#return $top; # TODO
+	return $root;
 }
 
 with qw(Renard::Boteh::Role::Sceneable);
