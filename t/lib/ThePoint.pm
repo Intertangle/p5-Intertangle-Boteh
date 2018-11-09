@@ -3,6 +3,8 @@ package ThePoint;
 # ABSTRACT: Generate a tree
 
 use aliased 'Renard::Jacquard::Actor';
+use aliased 'Renard::Jacquard::Actor::Taffeta::Group';
+use aliased 'Renard::Jacquard::Actor::Taffeta::Graphics';
 use aliased 'Renard::Jacquard::Layout::Fixed';
 use aliased 'Renard::Jacquard::Layout::All';
 use aliased 'Renard::Jacquard::Layout::Affine2D';
@@ -24,7 +26,7 @@ use Moo;
 #);
 
 fun create_page_node( :$fill = 'svg:black' ) {
-	my $page_group = Actor->new(
+	my $page_group = Group->new(
 		layout => Fixed->new
 	);
 
@@ -39,7 +41,7 @@ fun create_page_node( :$fill = 'svg:black' ) {
 		),
 	);
 	$page_group->add_child(
-		Actor->new(
+		Graphics->new(
 			content => $rect,
 		),
 		layout => {
@@ -51,7 +53,7 @@ fun create_page_node( :$fill = 'svg:black' ) {
 	if(1){#DEBUG
 	my $sz = 25;
 	$page_group->add_child(
-		Actor->new(
+		Graphics->new(
 			content => Rectangle->new(
 				width => $sz,
 				height => $sz,
@@ -67,7 +69,7 @@ fun create_page_node( :$fill = 'svg:black' ) {
 	);
 
 	$page_group->add_child(
-		Actor->new(
+		Graphics->new(
 			content => Rectangle->new(
 				width => $sz,
 				height => $sz,
@@ -90,7 +92,7 @@ fun create_page_node( :$fill = 'svg:black' ) {
 sub composed_affine_actor {
 	my (%args) = @_;
 
-	#my $affine = Actor->new(
+	#my $affine = Group->new(
 		#layout => Affine2D->new( transform =>
 				#Renard::Taffeta::Transform::Affine2D
 				#->new(
@@ -98,7 +100,7 @@ sub composed_affine_actor {
 				#)
 		#),
 	#);
-	#my $grid = Actor->new(
+	#my $grid = Group->new(
 		#layout => AutofillGrid->new(
 			#rows => 2,
 			##intergrid_space_rows => 50,
@@ -111,7 +113,7 @@ sub composed_affine_actor {
 
 	#return $affine;
 
-	return Actor->new(
+	return Group->new(
 		layout => Composed->new(
 			layouts => [
 				All->new,
@@ -137,7 +139,7 @@ sub composed_affine_actor {
 }
 
 method tree() {
-	#my $root = Actor->new(
+	#my $root = Group->new(
 		#layout => Composed->new(
 			#layouts => [
 				#All->new,
@@ -155,7 +157,7 @@ method tree() {
 			#],
 		#)
 	#);
-	my $top = Actor->new(
+	my $top = Group->new(
 		layout => Affine2D->new( transform =>
 			Renard::Taffeta::Transform::Affine2D::Scaling
 				->new(
@@ -163,7 +165,7 @@ method tree() {
 				)
 		),
 	);
-	my $root =  Actor->new(
+	my $root =  Group->new(
 		layout => AutofillGrid->new(
 			rows => 2,
 			intergrid_space => 50,
