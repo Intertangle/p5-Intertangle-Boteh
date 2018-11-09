@@ -3,11 +3,11 @@ package Renard::Boteh::Role::Sceneable;
 # ABSTRACT: A role for a scenes
 
 use Moo::Role;
-use Renard::Jacquard::Types qw(Actor);
+use Renard::Incunabula::Common::Types qw(InstanceOf);
 
-has tree => (
+has graph => (
 	is => 'rw',
-	isa => Actor,
+	isa => InstanceOf['Renard::Jacquard::Graph::Taffeta'],
 );
 
 1;

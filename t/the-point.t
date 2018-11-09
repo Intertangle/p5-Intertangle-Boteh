@@ -10,16 +10,13 @@ use ThePoint;
 
 subtest "What is the point?" => sub {
 	use Carp::Always;
-	my $top = ThePoint->tree;
-
-	use Renard::Jacquard::Render::GenerateTree;
+	my $graph = ThePoint->graph;
 
 	my $file = Path::Tiny->tempfile;
-	Renard::Jacquard::Render::GenerateTree
-		->render_tree_to_svg(
-			Renard::Jacquard::Render::GenerateTree->get_render_tree(
-				root => $top ),
-			$file );
+
+	my $svg = $graph->to_render_graph->to_svg;
+
+	$file->spew_utf8( $svg->xmlify );
 
 	#use DDP; p $tree, class => { expand => 'all' };
 

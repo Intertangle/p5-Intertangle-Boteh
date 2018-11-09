@@ -15,6 +15,7 @@ use Renard::Taffeta::Color::Named;
 use Renard::Taffeta::Style::Fill;
 use Renard::Taffeta::Style::Stroke;
 use Renard::Taffeta::Transform::Affine2D::Scaling;
+use Renard::Jacquard::Graph::Taffeta;
 
 use Moo;
 
@@ -138,7 +139,7 @@ sub composed_affine_actor {
 	);
 }
 
-method tree() {
+method graph() {
 	#my $root = Group->new(
 		#layout => Composed->new(
 			#layouts => [
@@ -199,7 +200,9 @@ method tree() {
 	#use DDP; p $root->layout->layouts->[1];
 
 	#return $top; # TODO
-	return $root;
+	return Renard::Jacquard::Graph::Taffeta->new(
+		graph => $root,
+	)
 }
 
 with qw(Renard::Boteh::Role::Sceneable);
