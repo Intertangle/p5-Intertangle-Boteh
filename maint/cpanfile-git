@@ -1,9 +1,9 @@
 requires 'Renard::Incunabula',
 	git => 'https://github.com/project-renard/p5-Renard-Incunabula.git',
 	branch => 'master';
-requires 'Renard::Taffeta',
-	git => 'https://github.com/project-renard/p5-Renard-Taffeta.git',
+requires 'Intertangle::Taffeta',
+	git => 'https://github.com/Intertangle/p5-Intertangle-Taffeta.git',
 	branch => 'master';
-requires 'Renard::Jacquard',
-	git => 'https://github.com/project-renard/p5-Renard-Jacquard.git',
+requires 'Intertangle::Jacquard',
+	git => 'https://github.com/Intertangle/p5-Intertangle-Jacquard.git',
 	branch => 'master';

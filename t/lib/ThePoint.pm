@@ -2,20 +2,20 @@ use Renard::Incunabula::Common::Setup;
 package ThePoint;
 # ABSTRACT: Generate a tree
 
-use aliased 'Renard::Jacquard::Actor';
-use aliased 'Renard::Jacquard::Actor::Taffeta::Group';
-use aliased 'Renard::Jacquard::Actor::Taffeta::Graphics';
-use aliased 'Renard::Jacquard::Layout::Fixed';
-use aliased 'Renard::Jacquard::Layout::All';
-use aliased 'Renard::Jacquard::Layout::Affine2D';
-use aliased 'Renard::Jacquard::Layout::AutofillGrid';
-use aliased 'Renard::Jacquard::Layout::Composed';
-use aliased 'Renard::Jacquard::Content::Rectangle';
-use Renard::Taffeta::Color::Named;
-use Renard::Taffeta::Style::Fill;
-use Renard::Taffeta::Style::Stroke;
-use Renard::Taffeta::Transform::Affine2D::Scaling;
-use Renard::Jacquard::Graph::Taffeta;
+use aliased 'Intertangle::Jacquard::Actor';
+use aliased 'Intertangle::Jacquard::Actor::Taffeta::Group';
+use aliased 'Intertangle::Jacquard::Actor::Taffeta::Graphics';
+use aliased 'Intertangle::Jacquard::Layout::Fixed';
+use aliased 'Intertangle::Jacquard::Layout::All';
+use aliased 'Intertangle::Jacquard::Layout::Affine2D';
+use aliased 'Intertangle::Jacquard::Layout::AutofillGrid';
+use aliased 'Intertangle::Jacquard::Layout::Composed';
+use aliased 'Intertangle::Jacquard::Content::Rectangle';
+use Intertangle::Taffeta::Color::Named;
+use Intertangle::Taffeta::Style::Fill;
+use Intertangle::Taffeta::Style::Stroke;
+use Intertangle::Taffeta::Transform::Affine2D::Scaling;
+use Intertangle::Jacquard::Graph::Taffeta;
 
 use Moo;
 
@@ -34,11 +34,11 @@ fun create_page_node( :$fill = 'svg:black' ) {
 	my $rect = Rectangle->new(
 		width  => 100,
 		height => 200,
-		fill   => Renard::Taffeta::Style::Fill->new(
-			color => Renard::Taffeta::Color::Named->new( name => $fill ),
+		fill   => Intertangle::Taffeta::Style::Fill->new(
+			color => Intertangle::Taffeta::Color::Named->new( name => $fill ),
 		),
-		stroke => Renard::Taffeta::Style::Stroke->new(
-			color => Renard::Taffeta::Color::Named->new( name => 'svg:blue' ),
+		stroke => Intertangle::Taffeta::Style::Stroke->new(
+			color => Intertangle::Taffeta::Color::Named->new( name => 'svg:blue' ),
 		),
 	);
 	$page_group->add_child(
@@ -58,8 +58,8 @@ fun create_page_node( :$fill = 'svg:black' ) {
 			content => Rectangle->new(
 				width => $sz,
 				height => $sz,
-				fill => Renard::Taffeta::Style::Fill->new(
-					color => Renard::Taffeta::Color::Named->new( name => 'svg:red' ),
+				fill => Intertangle::Taffeta::Style::Fill->new(
+					color => Intertangle::Taffeta::Color::Named->new( name => 'svg:red' ),
 				),
 			),
 		),
@@ -74,8 +74,8 @@ fun create_page_node( :$fill = 'svg:black' ) {
 			content => Rectangle->new(
 				width => $sz,
 				height => $sz,
-				fill => Renard::Taffeta::Style::Fill->new(
-					color => Renard::Taffeta::Color::Named->new( name => 'svg:red' ),
+				fill => Intertangle::Taffeta::Style::Fill->new(
+					color => Intertangle::Taffeta::Color::Named->new( name => 'svg:red' ),
 				),
 			),
 		),
@@ -95,7 +95,7 @@ sub composed_affine_actor {
 
 	#my $affine = Group->new(
 		#layout => Affine2D->new( transform =>
-				#Renard::Taffeta::Transform::Affine2D
+				#Intertangle::Taffeta::Transform::Affine2D
 				#->new(
 					##%args
 				#)
@@ -120,7 +120,7 @@ sub composed_affine_actor {
 				All->new,
 				(
 				Affine2D->new( transform =>
-					Renard::Taffeta::Transform::Affine2D
+					Intertangle::Taffeta::Transform::Affine2D
 						->new(
 							%args
 						)
@@ -145,7 +145,7 @@ method graph() {
 			#layouts => [
 				#All->new,
 				#Affine2D->new( transform =>
-					#Renard::Taffeta::Transform::Affine2D::Scaling
+					#Intertangle::Taffeta::Transform::Affine2D::Scaling
 						#->new(
 							#scale => [1.2, 1.2],
 						#)
@@ -160,7 +160,7 @@ method graph() {
 	#);
 	my $top = Group->new(
 		layout => Affine2D->new( transform =>
-			Renard::Taffeta::Transform::Affine2D::Scaling
+			Intertangle::Taffeta::Transform::Affine2D::Scaling
 				->new(
 					scale => [0.2, 0.2],
 				)
@@ -195,16 +195,16 @@ method graph() {
 	$one->add_child(   create_page_node( fill => $_ ) ) for qw(svg:firebrick svg:gold     svg:darkorchid);
 	$two->add_child(   create_page_node( fill => $_ ) ) for qw(svg:honeydew  svg:seagreen svg:limegreen);
 
-	my $states = $root->layout->update( state => Renard::Jacquard::Render::State->new );
+	my $states = $root->layout->update( state => Intertangle::Jacquard::Render::State->new );
 	#use DDP; p $states, class => { expand => 'all' };
 	#use DDP; p $root->layout->layouts->[1];
 
 	#return $top; # TODO
-	return Renard::Jacquard::Graph::Taffeta->new(
+	return Intertangle::Jacquard::Graph::Taffeta->new(
 		graph => $root,
 	)
 }
 
-with qw(Renard::Boteh::Role::Sceneable);
+with qw(Intertangle::Boteh::Role::Sceneable);
 
 1;
